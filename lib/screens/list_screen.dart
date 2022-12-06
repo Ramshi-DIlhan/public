@@ -41,18 +41,40 @@ class ListScreen extends StatelessWidget {
 Widget PaidList(Controller cont) {
   return Obx(() {
     print(cont.i.value);
-    return ListView.separated(
+    return ListView.builder(
       itemBuilder: ((context, index) {
-        return ListTile(
-          title: Text(paidlist[index].name),
-          subtitle: Text(paidlist[index].amount),
-          trailing: IconButton(
-            onPressed: (){delete(paidlist[index], cont);},
-            icon: Icon(Icons.delete, color: Colors.red,),
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.green[200],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    paidlist[index].name,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    paidlist[index].amount,
+                    style: TextStyle(fontSize: 17),
+                  ),
+                ],
+              ),
+              IconButton(
+                onPressed: () {delete(paidlist[index], cont);},
+                icon: Icon(Icons.delete, color: Colors.red),
+              )
+            ],
           ),
         );
       }),
-      separatorBuilder: ((context, index) => Divider()),
       itemCount: paidlist.length,
     );
   });
@@ -63,28 +85,44 @@ Widget PendingList(Controller cont) {
     print(cont.i.value);
     return ListView.separated(
       itemBuilder: ((context, index) {
-        return ListTile(
-          title: Text(pendinglist[index].name),
-          subtitle: Text(pendinglist[index].amount),
-          trailing: SizedBox(
-            width: 120,
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    moveToPaid(pendinglist[index], cont);
-                  },
-                  child: Text('Paid'),
-                ),
-                IconButton(
-                  onPressed: () {delete(pendinglist[index], cont);},
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.red,
+        return Container(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.red[100],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    pendinglist[index].name,
+                    style: TextStyle(fontSize: 20),
                   ),
-                ),
-              ],
-            ),
+                  SizedBox(height: 10),
+                  Text(
+                    pendinglist[index].amount,
+                    style: TextStyle(fontSize: 17),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                   IconButton(
+                    onPressed: (){moveToPaid(pendinglist[index], cont);},
+                    icon: Icon(Icons.verified,color: Colors.green,),
+                  ),
+                  IconButton(
+                    onPressed: () {delete(pendinglist[index], cont);},
+                    icon: Icon(Icons.delete, color: Colors.red),
+                  ),
+                 
+                ],
+              )
+            ],
           ),
         );
       }),

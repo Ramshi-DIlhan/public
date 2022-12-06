@@ -57,13 +57,18 @@ void update(Controller cont)async{
   db.addAll(personlist);
   paidlist.clear();
   pendinglist.clear();
+  personlist.sort((a, b) => a.name.compareTo(b.name));
   personlist.forEach((p) {
     p.paid
     ? paidlist.add(p)
         : pendinglist.add(p);
    });
+   paidlist.sort((a, b) => a.name.compareTo(b.name));
+   pendinglist.sort((a, b) => a.name.compareTo(b.name));
    cont.i.value++;
 } 
+
+// geeksforgeeks.sort((a, b) => a.length.compareTo(b.length));
 
 
 void moveToPaid(PersonModel person,Controller cont){

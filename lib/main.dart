@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       home: HomeScreen(),
+      title: 'Sangamam',
     );
   }
 }
