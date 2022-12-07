@@ -83,7 +83,7 @@ Widget PaidList(Controller cont) {
 Widget PendingList(Controller cont) {
   return Obx(() {
     print(cont.i.value);
-    return ListView.separated(
+    return ListView.builder(
       itemBuilder: ((context, index) {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -126,7 +126,6 @@ Widget PendingList(Controller cont) {
           ),
         );
       }),
-      separatorBuilder: ((context, index) => Divider()),
       itemCount: pendinglist.length,
     );
   });
